@@ -7,7 +7,7 @@ import torch.backends.cudnn as cudnn
 import yaml
 import torch
 from omegaconf import OmegaConf
-import clip
+import open-clip as clip
 
 ##############
 from llama_inference.llama import Tokenizer
@@ -158,10 +158,10 @@ def main(args):
     
 
     ###Load CLIP
-    model, preprocess = clip.load("ViT-L/14", device=device)
-    model.to(device)
-    if args.distributed:
-        model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[args.gpu])#, find_unused_parameters=True)
+    # model, _, preprocess = clip.create_model_and_transforms('ViT-L-14',pretrained='laion2b_s32b_b82k',device=device,cache_dir="/root/autodl-tmp/downloads")
+    # model.to(device)
+    # if args.distributed:
+    #     model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[args.gpu])#, find_unused_parameters=True)
 
     ###Load LLM
     llama_model_path = args.llama_model_path
