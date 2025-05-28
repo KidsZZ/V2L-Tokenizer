@@ -1,6 +1,6 @@
 imagenet_path=""
 log_dir=""
-llama_path=""
+llama_path="/root/autodl-tmp/downloads/llama-2-7b"
 
 ####Expand Global Vocabulary Set
 CUDA_VISIBLE_DEVICES=0 torchrun --nproc_per_node 1 --master_port=12247 step1_epanding_vocabulary_set.py \

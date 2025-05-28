@@ -1,6 +1,6 @@
 import numpy as np
 import torch
-import clip
+import open_clip as clip
 
 imagenet_templates = [
     'a bad photo of a {}.',
