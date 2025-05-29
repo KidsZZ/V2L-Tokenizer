@@ -2,14 +2,14 @@ imagenet_path=""
 log_dir=""
 llama_path="/root/autodl-tmp/downloads/llama-2-7b"
 
-####Expand Global Vocabulary Set
-CUDA_VISIBLE_DEVICES=0 torchrun --nproc_per_node 1 --master_port=12247 step1_epanding_vocabulary_set.py \
-    --batch_size 400 \
-    --max_seq_len 64 \
-    --llama_model_path $llama_path
+# ####Expand Global Vocabulary Set
+# CUDA_VISIBLE_DEVICES=0 torchrun --nproc_per_node 1 --master_port=12247 step1_epanding_vocabulary_set.py \
+#     --batch_size 400 \
+#     --max_seq_len 64 \
+#     --llama_model_path $llama_path
 
-# ####Generate Embedding for Vocabularies
-# CUDA_VISIBLE_DEVICES=0 torchrun --nproc_per_node 1 --master_port=12247 step2_generate_codebook_embedding.py
+####Generate Embedding for Vocabularies
+CUDA_VISIBLE_DEVICES=0 torchrun --nproc_per_node 1 --master_port=12247 step2_generate_codebook_embedding.py
 
 # ####Filtering Vocabularies with Training Images
 # CUDA_VISIBLE_DEVICES=0 torchrun --nproc_per_node 1 --master_port=12247 step3_global_codebook_filtering.py \

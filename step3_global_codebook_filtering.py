@@ -38,7 +38,7 @@ class ImageNetDataset(Dataset):
 
         self.data_root = data_root
 
-        _, self.preprocess = clip.load("ViT-L/14", device=DEVICE)
+        _, _, self.preprocess = clip.create_model_and_transforms('ViT-L-14',pretrained='laion2b_s32b_b82k',device=device,cache_dir="/root/autodl-tmp/downloads")
 
 
         self.image_ids = []
@@ -156,8 +156,10 @@ def main(args):
     )
 
     #config = load_config(args.vq_config_path, display=True)
-    model, _ = clip.load("ViT-L/14", device=DEVICE)
+    model, _, preprocess = clip.create_model_and_transforms('ViT-L-14',pretrained='laion2b_s32b_b82k',device=device,cache_dir="/root/autodl-tmp/downloads")
     model.to(device)
+    if args.distributed:
+        model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[args.gpu])#, find_unused_parameters=True)
 
 
     if args.distributed:
